@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Grid, Badge } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import PeopleIcon from '@material-ui/icons/People';
+import { useSelector } from 'react-redux'
+import { getCount } from './usersSlice'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,13 +19,13 @@ const useStyles = makeStyles((theme: Theme) =>
 function Header() {
 
     const classes = useStyles();
-    const [count, setCount] = useState(3);
+    const count = useSelector(getCount)
 
     return (
         <div className={classes.root}>
-            <Grid container>
+            <Grid container alignItems="stretch" justify="flex-end">
                 <Grid item xs={10}/>
-                <Grid item xs={2} alignItems="stretch" justify="flex-end">
+                <Grid item xs={2}>
                     <Badge badgeContent={count} color="secondary">
                         <PeopleIcon color="primary" fontSize="large"/>
                     </Badge>

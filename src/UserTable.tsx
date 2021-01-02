@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import React from 'react'
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core'
+import { useSelector } from 'react-redux'
+import { getUsers } from './usersSlice'
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(theme =>
   createStyles({
     root: {
       '& * th': {
@@ -15,19 +17,17 @@ const useStyles = makeStyles((theme: Theme) =>
 function UserTable() {
 
     const classes = useStyles();
-    
-    const [users, setUsers] = useState([
-        {id: 1, firstname: "Hans", lastname: "Wurst", mail: "hans@wurst.de"},
-        {id: 2, firstname: "Peter", lastname: "Lustig", mail: "peter@lustig.de"}
-    ]);
+    const users = useSelector(getUsers)
 
     return (
         <TableContainer component={Paper} className={classes.root}>
             <Table>
                 <TableHead>
-                    <TableCell>Firstname</TableCell>
-                    <TableCell>Lastname</TableCell>
-                    <TableCell>Mail</TableCell>
+                    <TableRow>
+                        <TableCell>Firstname</TableCell>
+                        <TableCell>Lastname</TableCell>
+                        <TableCell>Mail</TableCell>
+                    </TableRow>
                 </TableHead>
                 <TableBody>
                     {users.map((user) => (
